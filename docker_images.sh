@@ -1,4 +1,4 @@
-
+#!/bin/bash
 
 docker login -u 9398320218 -p Sai@12345
 
