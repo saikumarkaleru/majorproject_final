@@ -15,6 +15,12 @@ pipeline {
                 sh './docker_images.sh'
             }   
         }
+        stage('Kubernetes'){
+            steps{
+                sh 'sudo chmod -R 777 ./kubernetes.sh'
+                sh './kubernetes.sh'
+            }   
+        }
     }
 
 }
