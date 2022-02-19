@@ -13,7 +13,7 @@ pipeline {
             steps{
                 sh 'sudo chmod -R 777 ./docker_images.sh'
                 sh './docker_images.sh'
-               
+            }   
         }
     }
 
