@@ -1,5 +1,6 @@
 #!/bin/bash
-kubectl delete pods --all 
+
+sudo kubectl delete pods --all 
 kubectl delete deployments --all
 
 kubectl delete all --all
