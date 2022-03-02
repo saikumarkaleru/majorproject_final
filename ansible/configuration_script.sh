@@ -48,3 +48,5 @@ kubectl taint nodes  $hostname node-role.kubernetes.io/master-
 sudo apt install openjdk-11-jre -y 
 
 #https://phoenixnap.com/kb/install-jenkins-ubuntu
+
+
