@@ -11,13 +11,13 @@ pipeline {
         }
         stage('Build Docker Image 3'){
             steps{
-                sh ' chmod -R 777 ./docker_images.sh'
+                sh 'chmod -R 777 ./docker_images.sh'
                 sh './docker_images.sh'
             }   
         }
         stage('Kubernetes'){
             steps{
-                sh 'sudo chmod -R 777 ./kubernetes.sh'
+                sh 'chmod -R 777 ./kubernetes.sh'
                 sh './kubernetes.sh'
             }   
         }
