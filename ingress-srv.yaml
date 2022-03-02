@@ -10,6 +10,13 @@ spec:
     - host: ecommerce123.com
       http:
         paths:
+          - path: /api/orders/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: orders-srv
+                port:
+                  number: 8080
           - path: /api/?(.*)
             pathType: Prefix
             backend:
