@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Build Docker Image 3'){
             steps{
-                sh 'sudo chmod -R 777 ./docker_images.sh'
+                sh ' chmod -R 777 ./docker_images.sh'
                 sh './docker_images.sh'
             }   
         }
