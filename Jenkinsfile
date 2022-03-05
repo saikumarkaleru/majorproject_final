@@ -18,7 +18,7 @@ pipeline {
         stage('Kubernetes'){
             steps{
                 sh 'chmod -R 777 ./kubernetes.sh'
-                sh './kubernetes.sh'
+                sh 'sudo ./kubernetes.sh'
             }   
         }
     }

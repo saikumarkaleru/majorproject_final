@@ -28,3 +28,9 @@ cd ..
 
 
 kubectl apply -f ingress-srv.yaml
+
+#kubectl get ingress
+#kubectl describe ingress
+#kubectl describe svc ingress-nginx-controller -n ingress-nginx
+
+#https://stackoverflow.com/questions/44110876/kubernetes-service-external-ip-pending

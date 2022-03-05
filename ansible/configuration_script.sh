@@ -76,17 +76,35 @@ kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl versio
 #kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
 
 
-sleep 20
-
+sleep 15
 #node name -- private ip
 #
 
 hostname=$(hostname)
 kubectl taint nodes  $hostname node-role.kubernetes.io/master-
 
+sleep 15
 
-sudo apt install openjdk-11-jre -y 
+
+kubectl patch svc ingress-nginx-controller   -n ingress-nginx -p '{"spec": {"type": "LoadBalancer", "externalIPs":["172.31.71.218"]}}'
+
+
+sudo apt-update
+sudo apt install openjdk-8-jdk
 
 #https://phoenixnap.com/kb/install-jenkins-ubuntu
 
 
+
+
+sudo ex +g/useSecurity/d +g/authorizationStrategy/d -scwq /var/lib/jenkins/config.xml
+sudo /etc/init.d/jenkins restart
+
+sudo su
+
+sudo cat<<EOF >> /etc/sudoers
+jenkins ALL=(ALL) NOPASSWD: ALL
+EOF
+systemctl jenkins restart
+
+exit
