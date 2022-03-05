@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-service
@@ -10,13 +10,7 @@ spec:
     - host: ecommerce123.com
       http:
         paths:
-          - path: /api/orders/?(.*)
-            pathType: Prefix
-            backend:
-              service:
-                name: orders-srv
-                port:
-                  number: 8080
+          
           - path: /api/?(.*)
             pathType: Prefix
             backend:
