@@ -7,9 +7,16 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: 'true'
 spec:
   rules:
-    - host: ecommerce123.com
+    - host: ec2-44-203-160-79.compute-1.amazonaws.com
       http:
         paths:
+          - path: /api/orders/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: orders-srv
+                port:
+                  number: 8080
           
           - path: /api/?(.*)
             pathType: Prefix
