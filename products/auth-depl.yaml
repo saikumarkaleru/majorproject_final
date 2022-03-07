@@ -1,30 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend-depl
+  name: products-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: backend
+      app: products
   template:
     metadata:
       labels:
-        app: backend
+        app: products
     spec:
       containers:
-        - name: backend
-          image: 9398320218/mp_backend
+        - name: products
+          image: 9398320218/mp_products
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: backend-srv
+  name: products-srv
 spec:
   selector:
-    app: backend
+    app: products
   ports:
-    - name: backend
+    - name: products
       protocol: TCP
       port: 8080
       targetPort: 8080
