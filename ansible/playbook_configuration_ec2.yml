@@ -3,7 +3,7 @@
 
 ---
 - name: Let's copy our executable script to remote location, execute script and get result back.
-  remote_user: ec2-user
+  remote_user: ubuntu
   #sudo: yes
   hosts: all
   tasks:

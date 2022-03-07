@@ -4,6 +4,11 @@
 #https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
 
 
+sudo cat<<EOF | sudo tee -a /etc/sudoers
+ubuntu ALL=(ALL) NOPASSWD: ALL
+EOF
+
+
 echo 'Docker instlalation'
 
 #sudo yum update -y
@@ -25,8 +30,8 @@ sudo usermod -a -G docker ubuntu
 #sudo usermod -aG docker $(whoami)
 sudo chmod 666 /var/run/docker.sock
 
-sudo su 
-sudo cat<<EOF > /etc/docker/daemon.json
+#sudo su 
+sudo cat<<EOF | sudo tee /etc/docker/daemon.json
 {
    "exec-opts": ["native.cgroupdriver=systemd"]
 }
@@ -63,48 +68,35 @@ sudo apt-mark hold kubelet kubeadm kubectl
 
 sudo kubeadm init
 
-exit 
 
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
-
-#sleep 20
-
-#kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
-
-
-sleep 15
-#node name -- private ip
-#
-
+sleep 10
 hostname=$(hostname)
 kubectl taint nodes  $hostname node-role.kubernetes.io/master-
 
-sleep 15
 
-
-kubectl patch svc ingress-nginx-controller   -n ingress-nginx -p '{"spec": {"type": "LoadBalancer", "externalIPs":["172.31.71.218"]}}'
-
-
-sudo apt-update
-sudo apt install openjdk-8-jdk
+sudo apt update
+sudo apt install openjdk-8-jdk -y
 
 #https://phoenixnap.com/kb/install-jenkins-ubuntu
 
-
+curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt update
+sudo apt install jenkins -y
+sudo systemctl enable jenkins
+sudo systemctl start jenkins
 
 
 sudo ex +g/useSecurity/d +g/authorizationStrategy/d -scwq /var/lib/jenkins/config.xml
 sudo /etc/init.d/jenkins restart
 
-sudo su
-
-sudo cat<<EOF >> /etc/sudoers
+sudo cat<<EOF | sudo tee -a /etc/sudoers
 jenkins ALL=(ALL) NOPASSWD: ALL
 EOF
 systemctl jenkins restart
 
-exit

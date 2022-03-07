@@ -32,3 +32,4 @@ spec:
                 name: frontend-srv
                 port:
                   number: 3000
+
