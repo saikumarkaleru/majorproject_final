@@ -12,6 +12,9 @@ sleep 15
 kubectl apply -f backend-depl.yaml
 cd ..
 
+cd auth
+kubectl apply -f auth-depl.yaml
+cd ..
 
 cd  orders
 kubectl apply -f orders-depl.yaml
