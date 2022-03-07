@@ -6,14 +6,18 @@
 kubectl delete all --all
 
 
-cd backend
-kubectl apply -f auth-mongo-depl.yaml
-sleep 15
-kubectl apply -f backend-depl.yaml
-cd ..
+# cd backend
+# sleep 15
+# kubectl apply -f backend-depl.yaml
+# cd ..
 
 cd auth
+kubectl apply -f auth-mongo-depl.yaml
 kubectl apply -f auth-depl.yaml
+cd ..
+
+cd products
+kubectl apply -f products-depl.yaml
 cd ..
 
 cd  orders
