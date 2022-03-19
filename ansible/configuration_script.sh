@@ -93,10 +93,9 @@ sudo systemctl start jenkins
 
 
 sudo ex +g/useSecurity/d +g/authorizationStrategy/d -scwq /var/lib/jenkins/config.xml
-sudo /etc/init.d/jenkins restart
 
 sudo cat<<EOF | sudo tee -a /etc/sudoers
 jenkins ALL=(ALL) NOPASSWD: ALL
 EOF
-systemctl jenkins restart
 
+sudo systemctl restart jenkins

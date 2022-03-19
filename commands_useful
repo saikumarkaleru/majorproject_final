@@ -1,0 +1,44 @@
+WORKER NODE 
+
+#https://stackoverflow.com/questions/66213199/config-not-found-etc-kubernetes-admin-conf-after-setting-up-kubeadm-worker
+
+kubectl get nodes --kubeconfig /etc/kubernetes/kubelet.conf
+
+===
+
+
+netstat -pnlt | grep 6443
+
+
+===
+kubectl get pods --all-namespaces -o wide --field-selector spec.nodeName=<node>
+
+
+
+export KUBECONFIG=/etc/kubernetes/kubelet.conf
+
+sudo cp /etc/kubernetes/kubelet.conf /etc/kubernetes/admin.conf
+
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+
+sudo mv /etc/kubernetes/admin.conf /etc/kubernetes/kubelet.conf
+
+
+
+ubuntu@ip-172-31-90-113:~$ sudo mv /etc/kubernetes/kubelet.conf /etc/kubernetes/admin.conf
+ubuntu@ip-172-31-90-113:~$ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+cp: overwrite '/home/ubuntu/.kube/config'? 
+ubuntu@ip-172-31-90-113:~$ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+cp: overwrite '/home/ubuntu/.kube/config'? yes
+ubuntu@ip-172-31-90-113:~$ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+cp: overwrite '/home/ubuntu/.kube/config'? y
+ubuntu@ip-172-31-90-113:~$ kubectl get pods
+W0317 14:51:14.278551   21103 loader.go:221] Config not found: /etc/kubernetes/kubelet.conf
+error: yaml: line 54: mapping values are not allowed in this context
+ubuntu@ip-172-31-90-113:~$ sudo mv /etc/kubernetes/admin.conf /etc/kubernetes/kubelet.conf
+ubuntu@ip-172-31-90-113:~$ kubectl get pods
+error: error loading config file "/etc/kubernetes/kubelet.conf": open /etc/kubernetes/kubelet.conf: permission denied
+ubuntu@ip-172-31-90-113:~$ sudo kubectl get pods
+
+
+
