@@ -8,7 +8,6 @@
     connection: local
     gather_facts: False
     tags: provisioning
-
     vars:
       instance_type: t2.medium
       security_group: webservers
