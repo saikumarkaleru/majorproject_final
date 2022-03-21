@@ -11,7 +11,6 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 # sleep 15
 # kubectl apply -f backend-depl.yaml
 # cd ..
-
 cd auth
 kubectl apply -f auth-mongo-depl.yaml
 kubectl apply -f auth-depl.yaml
@@ -35,8 +34,10 @@ cd ..
 kubectl apply -f ingress-srv.yaml
 sleep 5
 kubectl apply -f ingress-srv.yaml
+sleep 15
 kubectl apply -f ingress-srv.yaml
-
+sleep 5
+kubectl apply -f ingress-srv.yaml
 
 export theIPaddress=$(ip addr show eth0 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1)
 
