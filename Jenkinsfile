@@ -20,7 +20,7 @@ pipeline {
                 sh 'echo Running Testing phase'
             }   
         }
-        stage('Kubernetes'){
+        stage('Continoues Deployment'){
             steps{
                 sh 'chmod -R 777 ./kubernetes.sh'
               //  sh 'sudo ./kubernetes.sh'
