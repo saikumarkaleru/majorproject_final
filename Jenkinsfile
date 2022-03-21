@@ -17,6 +17,7 @@ pipeline {
         stage('Testing code'){
             steps{
                 // todo
+                sh 'echo Running Testing phase'
             }   
         }
         stage('Kubernetes'){
