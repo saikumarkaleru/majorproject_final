@@ -1,16 +1,12 @@
 WORKER NODE 
 
+
+sudo kubeadm token create --print-join-command
+
 #https://stackoverflow.com/questions/66213199/config-not-found-etc-kubernetes-admin-conf-after-setting-up-kubeadm-worker
 
 kubectl get nodes --kubeconfig /etc/kubernetes/kubelet.conf
 
-===
-
-
-netstat -pnlt | grep 6443
-
-
-===
 kubectl get pods --all-namespaces -o wide --field-selector spec.nodeName=<node>
 
 
@@ -42,3 +38,26 @@ ubuntu@ip-172-31-90-113:~$ sudo kubectl get pods
 
 
 
+
+
+
+ANSIBLE
+
+ansible-playbook -i ansible/hosts ansible/playbook_ec2_create.yml 
+
+ansible-playbook -i ansible/hosts ansible/playbook_configuration_master.yml
+
+ansible-playbook -i ansible/hosts ansible/playbook_configuration_worker.yml 
+
+
+
+
+
+
+
+
+
+NETWORK
+
+
+netstat -pnlt | grep 6443
