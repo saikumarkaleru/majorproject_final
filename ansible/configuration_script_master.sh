@@ -97,5 +97,7 @@ sudo ex +g/useSecurity/d +g/authorizationStrategy/d -scwq /var/lib/jenkins/confi
 sudo cat<<EOF | sudo tee -a /etc/sudoers
 jenkins ALL=(ALL) NOPASSWD: ALL
 EOF
+sudo usermod -a -G docker jenkins
 
 sudo systemctl restart jenkins
+
