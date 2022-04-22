@@ -3,12 +3,11 @@
 
 ---
 - name: Let's copy our executable script to remote location, execute script and get result back.
-  hosts: worker
+  hosts: all
   remote_user: ubuntu
   tasks:
      - name: Transfer executable script script
-       copy: src=./configuration_script_worker.sh dest=/home/ubuntu/ mode=0777
+       copy: src=./configuration_monitoring.sh dest=/home/ubuntu/ mode=0777      
  
      - name: Execute the script
-       command: sh /home/ubuntu/configuration_script_worker.sh 
-  
+       command: sh /home/ubuntu/configuration_monitoring.sh 

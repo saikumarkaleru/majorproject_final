@@ -36,7 +36,7 @@ sleep 5
 kubectl apply -f ingress-srv.yaml
 sleep 15
 kubectl apply -f ingress-srv.yaml
-sleep 5
+sleep 25
 kubectl apply -f ingress-srv.yaml
 
 export theIPaddress=$(ip addr show eth0 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1)

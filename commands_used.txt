@@ -1,6 +1,5 @@
 WORKER NODE 
 
-
 sudo kubeadm token create --print-join-command
 
 #https://stackoverflow.com/questions/66213199/config-not-found-etc-kubernetes-admin-conf-after-setting-up-kubeadm-worker
