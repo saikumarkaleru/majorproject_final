@@ -45,7 +45,7 @@ ANSIBLE
 ansible-playbook -i ansible/hosts ansible/playbook_ec2_create.yml 
 
 ansible-playbook -i ansible/hosts ansible/playbook_configuration_master.yml
-
+,
 ansible-playbook -i ansible/hosts ansible/playbook_configuration_worker.yml 
 
 

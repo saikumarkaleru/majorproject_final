@@ -101,3 +101,8 @@ sudo usermod -a -G docker jenkins
 
 sudo systemctl restart jenkins
 
+#--------------NODE
+
+### Node.js v16 ###
+curl -fsSL https://deb.nodesource.com/setup_16.x | sudo bash -
+sudo apt install -y nodejs vim

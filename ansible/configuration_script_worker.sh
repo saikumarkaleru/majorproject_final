@@ -57,3 +57,11 @@ echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https:/
 sudo apt-get update
 sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
+
+
+
+#--------------NODE
+
+### Node.js v16 ###
+curl -fsSL https://deb.nodesource.com/setup_16.x | sudo bash -
+sudo apt install -y nodejs vim
