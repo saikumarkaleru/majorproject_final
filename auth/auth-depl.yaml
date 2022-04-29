@@ -4,6 +4,10 @@ metadata:
   name: auth-depl
 spec:
   replicas: 3
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 25%
+    maxUnavailable: 25%
   selector:
     matchLabels:
       app: auth
@@ -15,6 +19,7 @@ spec:
       containers:
         - name: auth
           image: 9398320218/mp_auth
+          imagePullPolicy: Always
 ---
 apiVersion: v1
 kind: Service
