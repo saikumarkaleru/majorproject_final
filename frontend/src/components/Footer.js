@@ -16,7 +16,7 @@ const Footer = () => {
 						>
 							<i className='fas fa-user-circle'></i>  Github
 						</a>
-						Copyright &copy; E-Commerce
+						Copyright &copy; E-Commerce sai
 					</Col>
 				</Row>
 			</Container>
