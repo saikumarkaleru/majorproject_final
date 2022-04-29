@@ -29,7 +29,7 @@ const Header = () => {
 				<Container>
 				
 					<LinkContainer to='/'>
-						<Navbar.Brand> E-Commerce</Navbar.Brand>
+						<Navbar.Brand> E-Commerce1</Navbar.Brand>
 					</LinkContainer>
 					<Navbar.Toggle aria-controls='basic-navbar-nav' />
 					<Navbar.Collapse id='basic-navbar-nav'>
