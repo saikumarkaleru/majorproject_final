@@ -38,13 +38,14 @@ kubectl rollout restart deployment/orders-depl
 
 
 
+kubectl delete -A ValidatingWebhookConfiguration ingress-nginx-admission
 
 kubectl apply -f ingress-srv.yaml --record=true
 sleep 5
 kubectl apply -f ingress-srv.yaml
-sleep 15
+#sleep 15
 kubectl apply -f ingress-srv.yaml
-sleep 25
+#sleep 25
 kubectl apply -f ingress-srv.yaml
 
 export theIPaddress=$(ip addr show eth0 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1)
