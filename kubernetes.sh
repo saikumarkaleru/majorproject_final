@@ -27,11 +27,19 @@ cd ..
 
 cd frontend
 kubectl apply -f frontend-depl.yaml
+
 cd ..
 
+kubectl rollout restart deployment/frontend-depl 
+kubectl rollout restart deployment/auth-depl
+kubectl rollout restart deployment/products-depl
+kubectl rollout restart deployment/orders-depl
 
 
-kubectl apply -f ingress-srv.yaml
+
+
+
+kubectl apply -f ingress-srv.yaml --record=true
 sleep 5
 kubectl apply -f ingress-srv.yaml
 sleep 15
@@ -49,3 +57,4 @@ kubectl patch svc ingress-nginx-controller   -n ingress-nginx -p '{"spec": {"typ
 #kubectl describe svc ingress-nginx-controller -n ingress-nginx
 
 #https://stackoverflow.com/questions/44110876/kubernetes-service-external-ip-pending
+

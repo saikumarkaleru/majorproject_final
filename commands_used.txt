@@ -13,6 +13,10 @@ kubectl describe svc servicename
 kubectl rollout history deployment deploymentname
 kubectl rollout undo deployment deploymentname
 
+kubectl rollout restart deployment/frontend-depl 
+
+
+
 
 WORKER NODE 
 
@@ -56,8 +60,10 @@ ansible-playbook -i ansible/hosts ansible/playbook_monitoring_all.yml
 
 
 PROMETHOUES
+
 systemctl status prometheus
-systemctl status grafana
+systemctl status grafana-server
+systemctl status node-exporter
 
 
 
@@ -73,3 +79,9 @@ NETWORK
 
 
 netstat -pnlt | grep 6443
+
+
+LINUX
+
+ps -aux | grep ubuntu
+

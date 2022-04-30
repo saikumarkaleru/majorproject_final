@@ -135,11 +135,12 @@ echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee -a /etc/a
 echo "deb https://packages.grafana.com/oss/deb beta main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
 
 sudo apt-get update
-sudo apt-get install grafana
+sudo apt-get install grafana -y 
 
 sudo systemctl daemon-reload
 sudo systemctl start grafana-server
 #sudo systemctl status grafana-server
+
 sudo systemctl enable grafana-server.service
 
 # GRAPHANA PORT --> 3000
