@@ -15,6 +15,8 @@ kubectl rollout undo deployment deploymentname
 
 kubectl rollout restart deployment/frontend-depl 
 
+kubectl get pv
+
 
 
 
@@ -27,20 +29,6 @@ sudo kubeadm token create --print-join-command
 kubectl get nodes --kubeconfig /etc/kubernetes/kubelet.conf
 
 kubectl get pods --all-namespaces -o wide --field-selector spec.nodeName=<node>
-
-
-
-export KUBECONFIG=/etc/kubernetes/kubelet.conf
-
-sudo cp /etc/kubernetes/kubelet.conf /etc/kubernetes/admin.conf
-
-sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-
-sudo mv /etc/kubernetes/admin.conf /etc/kubernetes/kubelet.conf
-
-
-
-
 
 
 
@@ -75,13 +63,11 @@ systemctl status node-exporter
 
 
 
-NETWORK
-
-
-netstat -pnlt | grep 6443
-
-
 LINUX
 
 ps -aux | grep ubuntu
 
+
+    NETWORK
+
+netstat -pnlt | grep 6443
