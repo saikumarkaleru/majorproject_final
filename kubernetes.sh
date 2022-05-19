@@ -38,7 +38,7 @@ kubectl rollout restart deployment/orders-depl
 
 
 
-kubectl delete -A ValidatingWebhookConfiguration ingress-nginx-admission
+#kubectl delete -A ValidatingWebhookConfiguration ingress-nginx-admission
 
 kubectl apply -f ingress-srv.yaml --record=true
 sleep 5

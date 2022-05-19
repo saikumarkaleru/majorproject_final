@@ -1,0 +1,399 @@
+Started by an SCM change
+Started by user unknown or anonymous
+Obtained Jenkinsfile from git https://github.com/saikumarkaleru/majorproject_final.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/Ecommerce_Pipeline
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+Cloning the remote Git repository
+Cloning repository https://github.com/saikumarkaleru/majorproject_final.git
+ > git init /var/lib/jenkins/workspace/Ecommerce_Pipeline # timeout=10
+Fetching upstream changes from https://github.com/saikumarkaleru/majorproject_final.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.17.1'
+ > git fetch --tags --progress -- https://github.com/saikumarkaleru/majorproject_final.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/saikumarkaleru/majorproject_final.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 612465e16eb208632809130f11420d0b72584b4b (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 612465e16eb208632809130f11420d0b72584b4b # timeout=10
+Commit message: "msg"
+First time build. Skipping changelog.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (SCM Checkout)
+[Pipeline] git
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/Ecommerce_Pipeline/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/saikumarkaleru/majorproject_final.git # timeout=10
+Fetching upstream changes from https://github.com/saikumarkaleru/majorproject_final.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.17.1'
+ > git fetch --tags --progress -- https://github.com/saikumarkaleru/majorproject_final.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 612465e16eb208632809130f11420d0b72584b4b (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 612465e16eb208632809130f11420d0b72584b4b # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git checkout -b main 612465e16eb208632809130f11420d0b72584b4b # timeout=10
+Commit message: "msg"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build Docker Image 3)
+[Pipeline] sh
++ chmod -R 777 ./docker_images.sh
+[Pipeline] sh
++ ./docker_images.sh
+WARNING! Using --password via the CLI is insecure. Use --password-stdin.
+WARNING! Your password will be stored unencrypted in /var/lib/jenkins/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+Sending build context to Docker daemon  263.2kB
+
+Step 1/8 : FROM node:16-alpine
+16-alpine: Pulling from library/node
+df9b9388f04a: Pulling fs layer
+70c90f7de7cb: Pulling fs layer
+f83937c3ce37: Pulling fs layer
+98b78bba1d70: Pulling fs layer
+98b78bba1d70: Waiting
+df9b9388f04a: Verifying Checksum
+df9b9388f04a: Download complete
+f83937c3ce37: Verifying Checksum
+f83937c3ce37: Download complete
+98b78bba1d70: Verifying Checksum
+98b78bba1d70: Download complete
+df9b9388f04a: Pull complete
+70c90f7de7cb: Verifying Checksum
+70c90f7de7cb: Download complete
+70c90f7de7cb: Pull complete
+f83937c3ce37: Pull complete
+98b78bba1d70: Pull complete
+Digest: sha256:1a9a71ea86aad332aa7740316d4111ee1bd4e890df47d3b5eff3e5bded3b3d10
+Status: Downloaded newer image for node:16-alpine
+ ---> e5065cc78074
+Step 2/8 : ENV CI=true
+ ---> Running in c8579e48a345
+Removing intermediate container c8579e48a345
+ ---> 4517682ad095
+Step 3/8 : WORKDIR /app
+ ---> Running in 8f7f84300240
+Removing intermediate container 8f7f84300240
+ ---> e211c0d9db43
+Step 4/8 : COPY package.json ./
+ ---> 24d04e876d0a
+Step 5/8 : RUN npm install
+ ---> Running in 57d272c46638
+[91mnpm[0m[91m WARN EBADENGINE[0m[91m Unsupported engine {
+npm WARN EBADENGINE   package: 'react-complete-e-commerce@1.0.0',
+npm WARN EBADENGINE   required: { node: '14.15.3', npm: '6.14.9' },
+npm WARN EBADENGINE   current: { node: 'v16.15.0', npm: '8.5.5' }
+npm WARN EBADENGINE }
+[0m
+added 313 packages, and audited 314 packages in 20s
+
+29 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+Removing intermediate container 57d272c46638
+ ---> ea107c763c8e
+Step 6/8 : COPY ./ ./
+ ---> b2a4c8cd7f9c
+Step 7/8 : EXPOSE 8000
+ ---> Running in aa61acad1891
+Removing intermediate container aa61acad1891
+ ---> 0a3e51e3a920
+Step 8/8 : CMD [ "npm" ,"start" ]
+ ---> Running in 9a9d6c063010
+Removing intermediate container 9a9d6c063010
+ ---> a4796784678a
+Successfully built a4796784678a
+Successfully tagged 9398320218/mp_auth:latest
+Using default tag: latest
+The push refers to repository [docker.io/9398320218/mp_auth]
+80214b688b78: Preparing
+345fb3e065fa: Preparing
+43d9d7b7a088: Preparing
+35c0ac5168fa: Preparing
+b96a177683f0: Preparing
+17b988d160a7: Preparing
+7e70902c1c87: Preparing
+4fc242d58285: Preparing
+17b988d160a7: Waiting
+7e70902c1c87: Waiting
+4fc242d58285: Waiting
+b96a177683f0: Layer already exists
+17b988d160a7: Layer already exists
+7e70902c1c87: Layer already exists
+4fc242d58285: Layer already exists
+35c0ac5168fa: Pushed
+43d9d7b7a088: Pushed
+80214b688b78: Pushed
+345fb3e065fa: Pushed
+latest: digest: sha256:8212c677cda38a78a882cfde436d9f49335d47e2bb5e07f1ccf9cb6928850622 size: 1993
+Sending build context to Docker daemon  263.2kB
+
+Step 1/8 : FROM node:16-alpine
+ ---> e5065cc78074
+Step 2/8 : ENV CI=true
+ ---> Using cache
+ ---> 4517682ad095
+Step 3/8 : WORKDIR /app
+ ---> Using cache
+ ---> e211c0d9db43
+Step 4/8 : COPY package.json ./
+ ---> Using cache
+ ---> 24d04e876d0a
+Step 5/8 : RUN npm install
+ ---> Using cache
+ ---> ea107c763c8e
+Step 6/8 : COPY ./ ./
+ ---> dd58891abb64
+Step 7/8 : EXPOSE 8000
+ ---> Running in cb564ad351ec
+Removing intermediate container cb564ad351ec
+ ---> cb06560fe793
+Step 8/8 : CMD [ "npm" ,"start" ]
+ ---> Running in a989d48c8334
+Removing intermediate container a989d48c8334
+ ---> 271a0a92a114
+Successfully built 271a0a92a114
+Successfully tagged 9398320218/mp_products:latest
+Using default tag: latest
+The push refers to repository [docker.io/9398320218/mp_products]
+15070b66fcd2: Preparing
+345fb3e065fa: Preparing
+43d9d7b7a088: Preparing
+35c0ac5168fa: Preparing
+b96a177683f0: Preparing
+17b988d160a7: Preparing
+7e70902c1c87: Preparing
+4fc242d58285: Preparing
+17b988d160a7: Waiting
+7e70902c1c87: Waiting
+4fc242d58285: Waiting
+b96a177683f0: Layer already exists
+345fb3e065fa: Mounted from 9398320218/mp_auth
+17b988d160a7: Layer already exists
+35c0ac5168fa: Mounted from 9398320218/mp_auth
+43d9d7b7a088: Mounted from 9398320218/mp_auth
+7e70902c1c87: Layer already exists
+4fc242d58285: Layer already exists
+15070b66fcd2: Pushed
+latest: digest: sha256:a7ce129e4e0598f837d33dba94ea05e3c6c8ea3c222878c3ba1d1b7911cd4816 size: 1993
+Sending build context to Docker daemon  263.2kB
+
+Step 1/8 : FROM node:16-alpine
+ ---> e5065cc78074
+Step 2/8 : ENV CI=true
+ ---> Using cache
+ ---> 4517682ad095
+Step 3/8 : WORKDIR /app
+ ---> Using cache
+ ---> e211c0d9db43
+Step 4/8 : COPY package.json ./
+ ---> Using cache
+ ---> 24d04e876d0a
+Step 5/8 : RUN npm install
+ ---> Using cache
+ ---> ea107c763c8e
+Step 6/8 : COPY ./ ./
+ ---> a6f93a504271
+Step 7/8 : EXPOSE 8000
+ ---> Running in b0bb5fee21c7
+Removing intermediate container b0bb5fee21c7
+ ---> c19fa9347803
+Step 8/8 : CMD [ "npm" ,"start" ]
+ ---> Running in 9d8c77b80d78
+Removing intermediate container 9d8c77b80d78
+ ---> 23de3945111e
+Successfully built 23de3945111e
+Successfully tagged 9398320218/mp_orders:latest
+Using default tag: latest
+The push refers to repository [docker.io/9398320218/mp_orders]
+209599929ad7: Preparing
+345fb3e065fa: Preparing
+43d9d7b7a088: Preparing
+35c0ac5168fa: Preparing
+b96a177683f0: Preparing
+17b988d160a7: Preparing
+7e70902c1c87: Preparing
+4fc242d58285: Preparing
+17b988d160a7: Waiting
+7e70902c1c87: Waiting
+4fc242d58285: Waiting
+b96a177683f0: Layer already exists
+17b988d160a7: Layer already exists
+43d9d7b7a088: Mounted from 9398320218/mp_products
+35c0ac5168fa: Mounted from 9398320218/mp_products
+4fc242d58285: Layer already exists
+7e70902c1c87: Layer already exists
+345fb3e065fa: Mounted from 9398320218/mp_products
+209599929ad7: Pushed
+latest: digest: sha256:0f15b038cfa0ce393e2371f2813937665cc76d6b041fe4f4c039dc9943caddcb size: 1993
+Sending build context to Docker daemon  2.155MB
+
+Step 1/7 : FROM node:16-alpine
+ ---> e5065cc78074
+Step 2/7 : ENV CI=true
+ ---> Using cache
+ ---> 4517682ad095
+Step 3/7 : WORKDIR /app
+ ---> Using cache
+ ---> e211c0d9db43
+Step 4/7 : COPY package.json ./
+ ---> 215d10c2ed21
+Step 5/7 : RUN npm install
+ ---> Running in 2a966bbaccf3
+[91mnpm [0m[91mWARN deprecated resolve-url@0.2.1: https://github.com/lydell/resolve-url#deprecated
+[0m[91mnpm WARN deprecated urix@0.1.0: Please see https://github.com/lydell/urix#deprecated
+[0m[91mnpm WARN deprecated @hapi/bourne@1.3.2: This version has been deprecated and is no longer supported or maintained
+[0m[91mnpm WARN deprecated @hapi/topo@3.1.6: This version has been deprecated and is no longer supported or maintained
+[0m[91mnpm WARN deprecated source-map-url@0.4.1: See https://github.com/lydell/source-map-url#deprecated
+[0m[91mnpm WARN deprecated @hapi/address@2.1.4: Moved to 'npm install @sideway/address'
+[0m[91mnpm WARN deprecated rollup-plugin-babel@4.4.0: This package has been deprecated and is no longer maintained. Please use @rollup/plugin-babel.
+[0m[91mnpm WARN deprecated @hapi/hoek@8.5.1: This version has been deprecated and is no longer supported or maintained
+[0m[91mnpm WARN deprecated flatten@1.0.3: flatten is deprecated in favor of utility frameworks such as lodash.
+[0m[91mnpm WARN deprecated querystring@0.2.1: The querystring API is considered Legacy. new code should use the URLSearchParams API instead.
+[0m[91mnpm WARN deprecated @hapi/joi@15.1.1: Switch to 'npm install joi'
+[0m[91mnpm WARN deprecated sane@4.1.0: some dependency vulnerabilities fixed, support for node < 10 dropped, and newer ECMAScript syntax/features added
+[0m[91mnpm WARN deprecated source-map-resolve@0.6.0: See https://github.com/lydell/source-map-resolve#deprecated
+[0m[91mnpm WARN [0m[91mdeprecated babel-eslint@10.1.0: babel-eslint is now @babel/eslint-parser. This package will no longer receive updates.
+[0m[91mnpm WARN deprecated[0m[91m redux-devtools-extension@2.13.9: Package moved to @redux-devtools/extension.
+[0m[91mnpm WARN deprecated source-map-resolve@0.5.3: See https://github.com/lydell/source-map-resolve#deprecated
+[0m[91mnpm WARN deprecated source-map-resolve@0.5.3: See https://github.com/lydell/source-map-resolve#deprecated
+[0m[91mnpm WARN deprecated uuid@3.4.0: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
+[0m[91mnpm WARN deprecated uuid@3.4.0: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
+[0m[91mnpm WARN deprecated querystring@0.2.0: The querystring API is considered Legacy. new code should use the URLSearchParams API instead.
+[0m[91mnpm WARN deprecated chokidar@2.1.8: Chokidar 2 does not receive security updates since 2019. Upgrade to chokidar 3 with 15x fewer dependencies
+[0m[91mnpm WARN deprecated svgo@1.3.2: This SVGO version is no longer supported. Upgrade to v2.x.x.
+[0m[91mnpm WARN deprecated chokidar@2.1.8: Chokidar 2 does not receive security updates since 2019. Upgrade to chokidar 3 with 15x fewer dependencies
+[0m[91mnpm WARN deprecated core-js@2.6.12: core-js@<3.4 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Please, upgrade your dependencies to the actual version of core-js.
+[0m
+added 1877 packages, and audited 1878 packages in 1m
+
+163 packages are looking for funding
+  run `npm fund` for details
+
+27 vulnerabilities (10 moderate, 15 high, 2 critical)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+Removing intermediate container 2a966bbaccf3
+ ---> 96544a909f8b
+Step 6/7 : COPY ./ ./
+ ---> 2a972dc8d388
+Step 7/7 : CMD ["npm", "start"]
+ ---> Running in 9d390fec1c76
+Removing intermediate container 9d390fec1c76
+ ---> 5bbb095d193c
+Successfully built 5bbb095d193c
+Successfully tagged 9398320218/mp_frontend:latest
+Using default tag: latest
+The push refers to repository [docker.io/9398320218/mp_frontend]
+894fa3302bb9: Preparing
+05daebe87b15: Preparing
+8cfda4595e48: Preparing
+35c0ac5168fa: Preparing
+b96a177683f0: Preparing
+17b988d160a7: Preparing
+7e70902c1c87: Preparing
+4fc242d58285: Preparing
+17b988d160a7: Waiting
+7e70902c1c87: Waiting
+4fc242d58285: Waiting
+b96a177683f0: Layer already exists
+17b988d160a7: Layer already exists
+35c0ac5168fa: Mounted from 9398320218/mp_orders
+7e70902c1c87: Layer already exists
+4fc242d58285: Layer already exists
+8cfda4595e48: Pushed
+894fa3302bb9: Pushed
+05daebe87b15: Pushed
+latest: digest: sha256:4624b474e72ebdbf956b9980885a0f5f60a4ce132c6b1c47526221d4a5d6ab20 size: 1995
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Testing code)
+[Pipeline] sh
++ echo Running Testing phase
+Running Testing phase
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Continoues Deployment)
+[Pipeline] sh
++ chmod -R 777 ./kubernetes.sh
+[Pipeline] sh
++ sudo -S su ubuntu -c ./kubernetes.sh
+namespace/ingress-nginx created
+serviceaccount/ingress-nginx created
+configmap/ingress-nginx-controller created
+clusterrole.rbac.authorization.k8s.io/ingress-nginx created
+clusterrolebinding.rbac.authorization.k8s.io/ingress-nginx created
+role.rbac.authorization.k8s.io/ingress-nginx created
+rolebinding.rbac.authorization.k8s.io/ingress-nginx created
+service/ingress-nginx-controller-admission created
+service/ingress-nginx-controller created
+deployment.apps/ingress-nginx-controller created
+ingressclass.networking.k8s.io/nginx created
+validatingwebhookconfiguration.admissionregistration.k8s.io/ingress-nginx-admission created
+serviceaccount/ingress-nginx-admission created
+clusterrole.rbac.authorization.k8s.io/ingress-nginx-admission created
+clusterrolebinding.rbac.authorization.k8s.io/ingress-nginx-admission created
+role.rbac.authorization.k8s.io/ingress-nginx-admission created
+rolebinding.rbac.authorization.k8s.io/ingress-nginx-admission created
+job.batch/ingress-nginx-admission-create created
+job.batch/ingress-nginx-admission-patch created
+deployment.apps/auth-mongo-depl created
+service/auth-mongo-srv created
+deployment.apps/auth-depl created
+service/auth-srv created
+deployment.apps/products-depl created
+service/products-srv created
+deployment.apps/orders-depl created
+service/orders-srv created
+deployment.apps/frontend-depl created
+service/frontend-srv created
+deployment.apps/frontend-depl restarted
+deployment.apps/auth-depl restarted
+deployment.apps/products-depl restarted
+deployment.apps/orders-depl restarted
+validatingwebhookconfiguration.admissionregistration.k8s.io "ingress-nginx-admission" deleted
+Flag --record has been deprecated, --record will be removed in the future
+ingress.networking.k8s.io/ingress-service created
+ingress.networking.k8s.io/ingress-service configured
+ingress.networking.k8s.io/ingress-service unchanged
+ingress.networking.k8s.io/ingress-service unchanged
+service/ingress-nginx-controller patched
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
